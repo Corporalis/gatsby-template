@@ -92,12 +92,13 @@ const NavigationBar = () => {
 export default NavigationBar
 
 const NavLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.primaryDark};
-  font-weight: var(--font-semi-bold);
+  color: ${({ theme }) => theme.colors.text};
   transition: color 0.4s;
+  text-decoration: none;
   &:hover {
-    color: ${({ theme }) => theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.text};
     text-decoration: underline;
+    text-decoration: none;
   }
 `
 const Header = styled.div`
@@ -138,6 +139,7 @@ const NavItem = styled.li`
   color: ${({ theme }) => theme.colors.primaryDark};
   font-weight: var(--font-semi-bold);
   transition: color 0.4s;
+  list-style-type: none;
 `
 
 const NavToggle = styled.div`
@@ -157,18 +159,14 @@ const NavClose = styled(NavToggle)`
 `
 
 const NavMenu = styled.div<NavigationBarProps>`
-  ${media.lessThan(MOBILE_BREAKPOINT_NAME)`
-   position: fixed;
-   top: 0;
-   right: -100%;
-   background-color: hsla(0, 0%, 6%, 0.2);
-   backdrop-filter: blur(16px);
-   -webkit-backdrop-filter: blur(16px);
-   width: 80%;
-   height: 100%;
-   padding: 6rem 3rem 0;
-   transition: right 0.4s;
-  `}
+  position: fixed;
+  top: 0;
+  right: -100%;
+  background-color: ${({ theme }) => theme.colors.primaryDark};
+  width: 80%;
+  height: 100%;
+  padding: 6rem 3rem 0;
+  transition: right 0.4s;
 
   ${({ isMenuOpen }) =>
     `

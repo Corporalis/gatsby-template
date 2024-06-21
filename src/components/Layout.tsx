@@ -18,7 +18,8 @@ export const Layout = ({ children }: { children: ReactNode }): JSX.Element => {
 }
 
 const Main = styled.main`
-  margin-top: 136px;
+  margin-top: 100px;
+  padding: 0 2em;
   ${media.lessThan('small')`
     margin-top: 100px;
   `}
