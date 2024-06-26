@@ -1,9 +1,9 @@
-import { useState } from 'react'
 import { Link } from 'gatsby'
-import styled from 'styled-components'
-import media, { defaultBreakpoints } from 'styled-media-query'
+import { useState } from 'react'
 import { IoClose, IoMenu } from 'react-icons/io5'
 import { useMediaQuery } from 'react-responsive'
+import styled from 'styled-components'
+import media, { defaultBreakpoints } from 'styled-media-query'
 
 interface NavigationBarProps {
   isMenuOpen: boolean
@@ -66,6 +66,7 @@ const NavigationBar = () => {
   return (
     <Header>
       <Nav>
+        <Spacer></Spacer>
         <NavTitle to="/">Navigation Bar</NavTitle>
 
         {isMobile && (
@@ -175,3 +176,5 @@ const NavMenu = styled.div<NavigationBarProps>`
     }
   `}
 `
+
+const Spacer = styled.div``
