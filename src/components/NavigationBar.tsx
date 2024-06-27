@@ -93,7 +93,7 @@ const NavigationBar = () => {
         </LogoContainer>
 
         {isMobile && (
-          <NavToggle isMenuOpen={isMenuOpen} onClick={toggleMenu}>
+          <NavToggle onClick={toggleMenu}>
             <IoMenu />
           </NavToggle>
         )}
@@ -167,7 +167,7 @@ const NavItem = styled.li`
   list-style-type: none;
 `
 
-const NavToggle = styled.div<NavigationBarProps>`
+const NavToggle = styled.div`
   font-size: 1.5rem;
   color: ${({ theme }) => theme.colors.text};
   cursor: pointer;
