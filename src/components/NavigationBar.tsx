@@ -1,4 +1,6 @@
-import { Link } from 'gatsby'
+import { GatsbyImageData } from '@/models/GatsbyImageData'
+import { Link, graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { useState } from 'react'
 import { IoClose, IoMenu } from 'react-icons/io5'
 import { useMediaQuery } from 'react-responsive'
@@ -9,12 +11,28 @@ interface NavigationBarProps {
   isMenuOpen: boolean
 }
 
+interface NavigationBarQuery {
+  image: GatsbyImageData
+}
+
 const MOBILE_BREAKPOINT = defaultBreakpoints.medium
 const MOBILE_BREAKPOINT_NAME = 'medium'
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const isMobile = useMediaQuery({ maxWidth: MOBILE_BREAKPOINT })
+
+  const { image } = useStaticQuery<NavigationBarQuery>(
+    graphql`
+      query {
+        image: file(relativePath: { eq: "logo.png" }) {
+          childImageSharp {
+            gatsbyImageData(layout: CONSTRAINED, width: 100)
+          }
+        }
+      }
+    `
+  )
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -67,10 +85,15 @@ const NavigationBar = () => {
     <Header>
       <Nav>
         <Spacer></Spacer>
-        <NavTitle to="/">Navigation Bar</NavTitle>
+        <LogoContainer>
+          <GatsbyImage
+            image={image.childImageSharp.gatsbyImageData}
+            alt="Logo"
+          />
+        </LogoContainer>
 
         {isMobile && (
-          <NavToggle onClick={toggleMenu}>
+          <NavToggle isMenuOpen={isMenuOpen} onClick={toggleMenu}>
             <IoMenu />
           </NavToggle>
         )}
@@ -133,6 +156,7 @@ const NavList = styled.ul`
   ${media.greaterThan(MOBILE_BREAKPOINT_NAME)`
     flex-direction: row;
     column-gap: 2.5rem;
+    margin-top: 8rem;
   `}
 `
 
@@ -143,10 +167,11 @@ const NavItem = styled.li`
   list-style-type: none;
 `
 
-const NavToggle = styled.div`
+const NavToggle = styled.div<NavigationBarProps>`
   font-size: 1.5rem;
   color: ${({ theme }) => theme.colors.text};
   cursor: pointer;
+  z-index: 1;
 
   ${media.greaterThan(MOBILE_BREAKPOINT_NAME)`
     display: none;
@@ -168,6 +193,7 @@ const NavMenu = styled.div<NavigationBarProps>`
   height: 100%;
   padding: 6rem 3rem 0;
   transition: right 0.4s;
+  z-index: 2;
 
   ${({ isMenuOpen }) =>
     `
@@ -178,3 +204,12 @@ const NavMenu = styled.div<NavigationBarProps>`
 `
 
 const Spacer = styled.div``
+
+const LogoContainer = styled.div`
+  background-color: transparent;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
