@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { createGlobalStyle } from 'styled-components'
 import media from 'styled-media-query'
 
@@ -101,4 +102,4 @@ export const GlobalStyles = createGlobalStyle`
       flex: 1 0 1;
     `}
   }
-`;
+`
