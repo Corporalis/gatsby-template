@@ -1,3 +1,4 @@
+import { MOBILE_BREAKPOINT, MOBILE_BREAKPOINT_NAME } from '@/models/Breakpoints'
 import { GatsbyImageData } from '@/models/GatsbyImageData'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
@@ -5,7 +6,7 @@ import { useState } from 'react'
 import { IoClose, IoMenu } from 'react-icons/io5'
 import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
-import media, { defaultBreakpoints } from 'styled-media-query'
+import media from 'styled-media-query'
 
 interface NavigationBarProps {
   isMenuOpen: boolean
@@ -14,9 +15,6 @@ interface NavigationBarProps {
 interface NavigationBarQuery {
   image: GatsbyImageData
 }
-
-const MOBILE_BREAKPOINT = defaultBreakpoints.medium
-const MOBILE_BREAKPOINT_NAME = 'medium'
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)

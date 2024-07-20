@@ -1,4 +1,5 @@
 import { GlobalStyles } from '@/GlobalStyles'
+import { MOBILE_BREAKPOINT_NAME } from '@/models/Breakpoints'
 import { JSX, ReactNode } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import media from 'styled-media-query'
@@ -18,9 +19,9 @@ export const Layout = ({ children }: { children: ReactNode }): JSX.Element => {
 }
 
 const Main = styled.main`
-  margin-top: 8em;
+  margin-top: 10em;
   padding: 0 2em;
-  ${media.lessThan('small')`
+  ${media.lessThan(MOBILE_BREAKPOINT_NAME)`
     margin-top: 8em;
   `}
 `
